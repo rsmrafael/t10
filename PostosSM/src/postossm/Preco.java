@@ -35,4 +35,16 @@ public class Preco {
         return this.dia.setDate(dia, mes, ano);
     }
     
+    public float getPrice(){
+        return this.price;
+    }
+    
+    public String getTipo(){
+        return this.tipo;
+    }
+    
+    public Data getDia(){
+        return this.dia;
+    }
+    
 }
