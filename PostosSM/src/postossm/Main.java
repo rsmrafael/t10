@@ -23,7 +23,6 @@ public class Main {
 		new PostossmView().setVisible(true);
 	    }
 	});
-        // TODO code application logic here
     }
     
 }

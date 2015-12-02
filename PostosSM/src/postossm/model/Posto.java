@@ -28,6 +28,17 @@ public class Posto {
     private List<Preco> PriceHistory;
     
     // Contrusctor
+    public Posto (){
+        this.CNPJ = "";
+        this.RazaoSocial = "";
+        this.NomeFantasia = "";
+        this.Bandeira = "";
+        this.Endereco = "";
+        this.Bairro = "";
+        this.CEP = "";
+        this.ImgPath = "";
+        this.PriceHistory = new ArrayList<>();
+    }
     public Posto (String CNPJ, String RS, String NF, String Band, String E, String Bairro, String CEP, String Img){
         this.CNPJ = CNPJ;
         this.RazaoSocial = RS;
@@ -106,5 +117,10 @@ public class Posto {
     
     public String getImgPath( ){
         return ImgPath;
+    }
+        
+    public boolean removePrice(Preco p){
+        boolean remove = this.PriceHistory.remove(p);
+        return remove;
     }
 }
