@@ -7,9 +7,10 @@ package postossm.controller;
 
 import javax.swing.SwingUtilities;
 import postossm.model.Posto;
-import postossm.model.PostosSimpleTableModel;
+import postossm.model.PostosTableModel;
 import postossm.view.PostossmView;
 import postossm.view.AddPostoView;
+import postossm.view.UpdateVisualizePostoView;
 
 /**
  *
@@ -18,13 +19,13 @@ import postossm.view.AddPostoView;
 public class PostossmController {
     
     private PostossmView view;
-    private PostosSimpleTableModel model;
+    private PostosTableModel model;
     
     public void insert() {
         //Chama outra janela
     }
 
-    public PostossmController(PostossmView view, PostosSimpleTableModel model) {
+    public PostossmController(PostossmView view, PostosTableModel model) {
         this.view = view;
         this.model = model;
     }
@@ -38,7 +39,9 @@ public class PostossmController {
     }
     
     public void add(){
-        new AddPostoView(model).setVisible(true);
+        
+        view.setVisible(false);
+        new AddPostoView(view,model).setVisible(true);
     }
     
     public void VisualizeUpdate(){
@@ -47,6 +50,8 @@ public class PostossmController {
             return;
         }
         // Abrir novo frame utilizando os dados do posto com o indice index
+        view.setVisible(false);
+        new UpdateVisualizePostoView(view,model,index).setVisible(true);
     }
     
     public void remove() {

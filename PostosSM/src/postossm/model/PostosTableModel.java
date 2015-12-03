@@ -12,12 +12,12 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Rafa
  */
-public class PostosSimpleTableModel extends AbstractTableModel  {
+public class PostosTableModel extends AbstractTableModel  {
     private static final String[] columnNames = {"Posto", "Bairro", "Bandeira"};
 
     private ArrayList<Posto> postos;
     
-    public PostosSimpleTableModel() {
+    public PostosTableModel() {
         postos = new ArrayList<Posto>();
     }
 

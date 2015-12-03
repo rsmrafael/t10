@@ -25,7 +25,7 @@ public class Posto {
     private String Bairro;
     private String CEP;
     private String ImgPath;
-    private List<Preco> PriceHistory;
+    private ArrayList<Preco> PriceHistory;
     
     // Contrusctor
     public Posto (){
@@ -83,6 +83,10 @@ public class Posto {
         this.ImgPath = Img;
     }
     
+    public void setPriceList(ArrayList<Preco> List){
+        this.PriceHistory = List;
+    }
+    
     public void addPrice(Preco p){
         this.PriceHistory.add(p);
     }
@@ -118,7 +122,11 @@ public class Posto {
     public String getImgPath( ){
         return ImgPath;
     }
-        
+    
+    public ArrayList<Preco> getPriceList( ){
+        return this.PriceHistory;
+    }
+    
     public boolean removePrice(Preco p){
         boolean remove = this.PriceHistory.remove(p);
         return remove;

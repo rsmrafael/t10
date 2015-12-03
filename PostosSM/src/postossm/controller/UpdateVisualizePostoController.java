@@ -6,7 +6,7 @@
 
 package postossm.controller;
 
-import postossm.view.AddPostoView;
+import postossm.view.UpdateVisualizePostoView;
 import postossm.model.PostosTableModel;
 import postossm.model.PrecosTableModel;
 import postossm.model.Posto;
@@ -17,29 +17,28 @@ import postossm.view.PostossmView;
  *
  * @author Rafa
  */
-public class AddPostoController {
+public class UpdateVisualizePostoController {
     
-    private AddPostoView view;
+    private UpdateVisualizePostoView view;
     private PostosTableModel model;
     private PostossmView HomeFrame;
     private PrecosTableModel PrecoTable;
+    private int PostoIndex;
     
-  public AddPostoController(AddPostoView view,PostossmView HomeFrame, PostosTableModel model, PrecosTableModel PrecoTable) {
+  public UpdateVisualizePostoController(UpdateVisualizePostoView view,PostossmView HomeFrame, PostosTableModel model, PrecosTableModel PrecoTable, int PostoIndex) {
         this.view = view;
         this.model = model;
         this.HomeFrame = HomeFrame;
         this.PrecoTable = PrecoTable;
+        this.PostoIndex = PostoIndex;
     }
     
-    public void add() {
+    public void update() {
         //Adiciona posto
         Posto p = newFromView();
         if (p != null) {
-            model.add(p);
+            model.update(PostoIndex,p);
         }
-        //Retorna para frame original
-        HomeFrame.setVisible(true);
-        view.dispose();
     }
     
     public void addPrice(){
@@ -48,6 +47,7 @@ public class AddPostoController {
             PrecoTable.add(p);
         }
     }
+    
     public void removePrice(){
         int index = view.getPriceTable().getSelectedRow();
         if (index == -1) {
@@ -55,7 +55,8 @@ public class AddPostoController {
         }
         PrecoTable.remove(index);
     }
-    public void cancel() {
+    
+    public void back() {
         //Retorna para frame original
         HomeFrame.setVisible(true);
         view.dispose();

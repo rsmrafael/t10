@@ -5,33 +5,47 @@
  */
 package postossm.view;
 
-
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import postossm.controller.AddPostoController;
-import postossm.model.PrecosTableModel;
+import postossm.controller.UpdateVisualizePostoController;
 import postossm.model.PostosTableModel;
+import postossm.model.PrecosTableModel;
 
 /**
  *
  * @author Rafa
  */
-public class AddPostoView extends javax.swing.JFrame {
-
-    private AddPostoController controller;
+public class UpdateVisualizePostoView extends javax.swing.JFrame {
+    
+    private UpdateVisualizePostoController controller;
     private PrecosTableModel PrecoTable;
     private String ComboBox_Combustivel;
+    private int PostoIndex;
+    
     /**
-     * Creates new form AddPostoView
+     * Creates new form UpdateVisualizePostoView
+     * @param PostoIndex
      */
-    public AddPostoView(PostossmView HomeFrame,PostosTableModel model) {
+    public UpdateVisualizePostoView(PostossmView HomeFrame,PostosTableModel model,int PostoIndex) {
         initComponents();
+        
         PrecoTable = new PrecosTableModel();
         jtPriceList.setModel(PrecoTable);
-        controller = new AddPostoController(this,HomeFrame,model,PrecoTable);
+        this.PostoIndex = PostoIndex;
+        controller = new UpdateVisualizePostoController(this,HomeFrame,model,PrecoTable,PostoIndex);
+        
         ComboBox_Combustivel = (String)JComboBox_Combustivel.getSelectedItem();
+        CNPJ.setText(model.select(PostoIndex).getCNPJ());
+        RS.setText(model.select(PostoIndex).getRS());
+        NF.setText(model.select(PostoIndex).getNF());
+        Bandeira.setText(model.select(PostoIndex).getBandeira());
+        Endereco.setText(model.select(PostoIndex).getEndereco());
+        Bairro.setText(model.select(PostoIndex).getBairro());
+        CEP.setText(model.select(PostoIndex).getCEP());
+        ImgPath.setText(model.select(PostoIndex).getImgPath());
+        PrecoTable.setList(model.select(PostoIndex).getPriceList());
     }
 
     public JTextField getTextCNPJ() {
@@ -85,7 +99,7 @@ public class AddPostoView extends javax.swing.JFrame {
     public void showError(String msg) {
         JOptionPane.showMessageDialog(this, msg);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,12 +109,6 @@ public class AddPostoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        CNPJ = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        RS = new javax.swing.JTextField();
-        NF = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         Bandeira = new javax.swing.JTextField();
@@ -110,44 +118,30 @@ public class AddPostoView extends javax.swing.JFrame {
         Bairro = new javax.swing.JTextField();
         CEP = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        JComboBox_Combustivel = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        ImgPath = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtPriceList = new javax.swing.JTable();
+        ImgPath = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        CNPJ = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         dia = new javax.swing.JTextField();
+        RS = new javax.swing.JTextField();
         mes = new javax.swing.JTextField();
+        NF = new javax.swing.JTextField();
         ano = new javax.swing.JTextField();
         price = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        JComboBox_Combustivel = new javax.swing.JComboBox<>();
-
-        jLabel1.setText("Adicionar Posto");
-
-        CNPJ.setToolTipText("");
-
-        jLabel2.setText("CNPJ:");
-
-        jLabel3.setText("Razão Social:");
-
-        RS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RSActionPerformed(evt);
-            }
-        });
-
-        NF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NFActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Nome Fantasia:");
 
@@ -171,21 +165,19 @@ public class AddPostoView extends javax.swing.JFrame {
 
         jLabel8.setText("CEP:");
 
+        JComboBox_Combustivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gasolina", "Etanol", "Diesel" }));
+        JComboBox_Combustivel.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                JComboBox_CombustivelItemStateChanged(evt);
+            }
+        });
+        JComboBox_Combustivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JComboBox_CombustivelActionPerformed(evt);
+            }
+        });
+
         jLabel9.setText("Caminho para Imagem:");
-
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Confirmar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jtPriceList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -202,7 +194,21 @@ public class AddPostoView extends javax.swing.JFrame {
 
         jLabel10.setText("Dia");
 
+        jButton2.setText("Voltar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         jLabel11.setText("Mes");
+
+        jButton1.setText("Atualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("Ano");
 
@@ -210,9 +216,29 @@ public class AddPostoView extends javax.swing.JFrame {
 
         jLabel14.setText("Preco");
 
+        jLabel1.setText("Visualizar/Atualizar Posto");
+
+        CNPJ.setToolTipText("");
+
+        jLabel2.setText("CNPJ:");
+
+        jLabel3.setText("Razão Social:");
+
         dia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 diaActionPerformed(evt);
+            }
+        });
+
+        RS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RSActionPerformed(evt);
+            }
+        });
+
+        NF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NFActionPerformed(evt);
             }
         });
 
@@ -227,18 +253,6 @@ public class AddPostoView extends javax.swing.JFrame {
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
-            }
-        });
-
-        JComboBox_Combustivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gasolina", "Etanol", "Diesel" }));
-        JComboBox_Combustivel.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                JComboBox_CombustivelItemStateChanged(evt);
-            }
-        });
-        JComboBox_Combustivel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JComboBox_CombustivelActionPerformed(evt);
             }
         });
 
@@ -388,14 +402,6 @@ public class AddPostoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RSActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RSActionPerformed
-
-    private void NFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NFActionPerformed
-
     private void EnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnderecoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EnderecoActionPerformed
@@ -403,26 +409,6 @@ public class AddPostoView extends javax.swing.JFrame {
     private void BairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BairroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BairroActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        controller.cancel();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controller.add();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        controller.addPrice();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        controller.removePrice();
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void diaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_diaActionPerformed
 
     private void JComboBox_CombustivelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JComboBox_CombustivelItemStateChanged
         JComboBox cb = (JComboBox)evt.getSource();
@@ -432,6 +418,34 @@ public class AddPostoView extends javax.swing.JFrame {
     private void JComboBox_CombustivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JComboBox_CombustivelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JComboBox_CombustivelActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        controller.back();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        controller.update();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void diaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_diaActionPerformed
+
+    private void RSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RSActionPerformed
+
+    private void NFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NFActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        controller.addPrice();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        controller.removePrice();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

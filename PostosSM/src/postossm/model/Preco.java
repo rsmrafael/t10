@@ -5,6 +5,7 @@
  */
 package postossm.model;
 
+import java.util.Date;
 /**
  *
  * @author Rafa
@@ -14,13 +15,29 @@ public class Preco {
     // Atributos
     private float price;
     private String tipo;
-    private Data dia;
+    private Date dia;
+    
+    public Preco(){
+        this.price = 0;
+        this.tipo = "";
+        this.dia = new Date(){
+            @Override
+            public String toString() {
+                return String.format("%d/%02d/%02d", getDate(), getMonth() + 1, getYear());
+            }
+        };
+    }
     
     // Construtor
     public Preco(float price, String tipo, int dia, int mes, int ano){
         this.price = price;
         this.tipo = tipo;
-        this.dia = new Data(dia,mes,ano);
+        this.dia = new Date(ano,mes,dia){
+            @Override
+            public String toString() {
+                return String.format("%d/%02d/%02d", getDate(), getMonth() + 1, getYear());
+            }
+        };
     }
     
     public void setPrice(float price){
@@ -31,8 +48,11 @@ public class Preco {
         this.tipo = tipo;
     }
     
-    public boolean setDia(int dia, int mes, int ano){
-        return this.dia.setDate(dia, mes, ano);
+    public void setDia(int dia, int mes, int ano){
+        this.dia.setDate(dia);
+        this.dia.setMonth(mes);
+        this.dia.setYear(ano);
+        
     }
     
     public float getPrice(){
@@ -43,7 +63,7 @@ public class Preco {
         return this.tipo;
     }
     
-    public Data getDia(){
+    public Date getDia(){
         return this.dia;
     }
     
