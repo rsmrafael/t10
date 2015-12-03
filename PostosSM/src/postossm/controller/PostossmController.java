@@ -35,13 +35,11 @@ public class PostossmController {
             //Abre arquivo
         FileOutputStream saveFile = new FileOutputStream("Data.sav");
         //Salva dados
-        ObjectOutputStream save = new ObjectOutputStream(saveFile);
-        //Salva dados
-        save.writeObject(model.getList());
-        /*for (Posto p : model.getList()) {
-            save.writeObject(p);
-        }*/
-        save.close();
+        try ( //Salva dados
+                ObjectOutputStream save = new ObjectOutputStream(saveFile)) {
+            //Salva dados
+            save.writeObject(model.getList());
+        }
     }
     
     public void load(){
@@ -51,7 +49,8 @@ public class PostossmController {
             try ( // Create an ObjectInputStream to get objects from save file.
                     ObjectInputStream save = new ObjectInputStream(saveFile)) {
                 model.setList((ArrayList<Posto>) save.readObject());
-                model.updateTable();
+                view.getTextBuscaBairro().setText("");
+                model.updateTable("");
             }
         }
         catch(IOException | ClassNotFoundException exc){

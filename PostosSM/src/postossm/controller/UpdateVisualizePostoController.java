@@ -6,6 +6,7 @@
 
 package postossm.controller;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import postossm.view.UpdateVisualizePostoView;
 import postossm.model.PostosTableModel;
@@ -39,6 +40,7 @@ public class UpdateVisualizePostoController {
         Posto p = newFromView();
         if (p != null) {
             PostoTable.update(PostoIndex,p);
+            view.setImage(p.getImgPath());
         }
         //Mensagem de atualizado
         JOptionPane.showMessageDialog(view,"Cadastro atualizado.");
