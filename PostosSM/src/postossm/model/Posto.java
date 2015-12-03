@@ -5,6 +5,7 @@
  */
 package postossm.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  * @author Rafa
  */
 
-public class Posto {
+public class Posto implements Serializable{
     
     // Atributes
     private String CNPJ;

@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
 public class PostosTableModel extends AbstractTableModel  {
     private static final String[] columnNames = {"Posto", "Bairro", "Bandeira"};
 
-    private final ArrayList<Posto> postos;
+    private ArrayList<Posto> postos;
     private final ArrayList<Posto> postosMostrados;
     private String LastSearchedBairro;
     
@@ -24,7 +24,15 @@ public class PostosTableModel extends AbstractTableModel  {
         postosMostrados = new ArrayList<>();
         LastSearchedBairro = "";
     }
-
+    
+    public ArrayList<Posto> getList(){
+        return postos;
+    }
+    
+    public void setList(ArrayList<Posto> List){
+        this.postos = List;
+    }
+    
     public void remove(int index) {
         postos.remove(postosMostrados.get(index));
 	postosMostrados.remove(index);
@@ -39,15 +47,19 @@ public class PostosTableModel extends AbstractTableModel  {
         // Adds the element in the last position in the list
         postos.add(p);
         postosMostrados.add(p);
-        updateTable(LastSearchedBairro);
+        updateTable();
         fireTableRowsInserted(postosMostrados.size()-1, postosMostrados.size()-1);
     }
 
     public void update(int index, Posto p) {
         postos.set(postos.indexOf(postosMostrados.get(index)), p);
         postosMostrados.set(index,p);
-        updateTable(LastSearchedBairro);
+        updateTable();
         fireTableRowsUpdated(index, index);
+    }
+    
+    public void updateTable( ){
+        updateTable(LastSearchedBairro);
     }
     
     public void updateTable(String Bairro){

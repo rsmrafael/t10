@@ -6,6 +6,10 @@
 package postossm.view;
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import postossm.controller.PostossmController;
 import postossm.model.PostosTableModel;
 import javax.swing.JOptionPane;
@@ -203,7 +207,13 @@ public class PostossmView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        controller.save();
+        try {
+            controller.save();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PostossmView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PostossmView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed

@@ -5,7 +5,8 @@
  */
 package postossm.controller;
 
-import javax.swing.SwingUtilities;
+import java.io.*;
+import java.util.ArrayList;
 import postossm.model.Posto;
 import postossm.model.PostosTableModel;
 import postossm.view.PostossmView;
@@ -30,12 +31,31 @@ public class PostossmController {
         this.model = model;
     }
     
-    public void save() {
+    public void save() throws FileNotFoundException, IOException {
+            //Abre arquivo
+        FileOutputStream saveFile = new FileOutputStream("Data.sav");
         //Salva dados
+        ObjectOutputStream save = new ObjectOutputStream(saveFile);
+        //Salva dados
+        save.writeObject(model.getList());
+        /*for (Posto p : model.getList()) {
+            save.writeObject(p);
+        }*/
+        save.close();
     }
     
     public void load(){
-        //Carrega dados
+        try{
+        // Open file to read from, named SavedObj.sav.
+            FileInputStream saveFile = new FileInputStream("Data.sav");
+            try ( // Create an ObjectInputStream to get objects from save file.
+                    ObjectInputStream save = new ObjectInputStream(saveFile)) {
+                model.setList((ArrayList<Posto>) save.readObject());
+                model.updateTable();
+            }
+        }
+        catch(IOException | ClassNotFoundException exc){
+        }
     }
     
     public void add(){ 
@@ -64,5 +84,9 @@ public class PostossmController {
 
     public void buscar(){
         model.updateTable(view.getTextBuscaBairro().getText());
+    }
+
+    private ObjectOutputStream ObjectOutputStream(FileOutputStream saveFile) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -5,12 +5,13 @@
  */
 package postossm.model;
 
+import java.io.Serializable;
 import java.util.Date;
 /**
  *
  * @author Rafa
  */
-public class Preco {
+public class Preco implements Serializable{
     
     // Atributos
     private float price;

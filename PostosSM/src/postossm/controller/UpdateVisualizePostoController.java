@@ -21,14 +21,14 @@ import postossm.view.PostossmView;
 public class UpdateVisualizePostoController {
     
     private final UpdateVisualizePostoView view;
-    private final PostosTableModel model;
+    private final PostosTableModel PostoTable;
     private final PostossmView HomeFrame;
     private final PrecosTableModel PrecoTable;
     private final int PostoIndex;
     
-  public UpdateVisualizePostoController(UpdateVisualizePostoView view,PostossmView HomeFrame, PostosTableModel model, PrecosTableModel PrecoTable, int PostoIndex) {
+  public UpdateVisualizePostoController(UpdateVisualizePostoView view,PostossmView HomeFrame, PostosTableModel PostoTable, PrecosTableModel PrecoTable, int PostoIndex) {
         this.view = view;
-        this.model = model;
+        this.PostoTable = PostoTable;
         this.HomeFrame = HomeFrame;
         this.PrecoTable = PrecoTable;
         this.PostoIndex = PostoIndex;
@@ -38,7 +38,7 @@ public class UpdateVisualizePostoController {
         //Adiciona posto
         Posto p = newFromView();
         if (p != null) {
-            model.update(PostoIndex,p);
+            PostoTable.update(PostoIndex,p);
         }
         //Mensagem de atualizado
         JOptionPane.showMessageDialog(view,"Cadastro atualizado.");
@@ -48,6 +48,20 @@ public class UpdateVisualizePostoController {
         Preco p = newPriceFromView();
         if (p != null) {
             PrecoTable.add(p);
+        }
+    }
+    
+    public void updatePrice() {
+        //Captura indice de preço
+        int index = view.getPriceTable().getSelectedRow();
+        if (index == -1) {
+            view.showError("Selecione um preço para atualizar!");
+            return;
+        }
+        //Atualiza preço
+        Preco p = newPriceFromView();
+        if (p != null) {
+            PrecoTable.update(index,p);
         }
     }
     

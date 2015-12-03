@@ -60,6 +60,20 @@ public class AddPostoController {
         HomeFrame.setVisible(true);
         view.dispose();
     }
+       
+    public void updatePrice() {
+        //Captura indice de preço
+        int index = view.getPriceTable().getSelectedRow();
+        if (index == -1) {
+            view.showError("Selecione um preço para atualizar!");
+            return;
+        }
+        //Atualiza preço
+        Preco p = newPriceFromView();
+        if (p != null) {
+            PrecoTable.update(index,p);
+        }
+    }
     
     private Preco newPriceFromView() {
         try {
