@@ -7,6 +7,7 @@ package postossm.controller;
 
 import java.io.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import postossm.model.Posto;
 import postossm.model.PostosTableModel;
 import postossm.view.PostossmView;
@@ -32,13 +33,25 @@ public class PostossmController {
     }
     
     public void save() throws FileNotFoundException, IOException {
+        Object[] options = {"Sim",
+                    "Não"};
+        int n = JOptionPane.showOptionDialog(view,
+            "Esta opção poderá sobrescrever dados antigos.\nDeseja continuar?",
+            "Confirmar operação",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,     //do not use a custom Icon
+            options,  //the titles of buttons
+            options[0]); //default button title);
+        if(n == JOptionPane.YES_OPTION){
             //Abre arquivo
-        FileOutputStream saveFile = new FileOutputStream("Data.sav");
-        //Salva dados
-        try ( //Salva dados
-                ObjectOutputStream save = new ObjectOutputStream(saveFile)) {
+            FileOutputStream saveFile = new FileOutputStream("Data.sav");
             //Salva dados
-            save.writeObject(model.getList());
+            try ( //Salva dados
+                    ObjectOutputStream save = new ObjectOutputStream(saveFile)) {
+                //Salva dados
+                save.writeObject(model.getList());
+            }
         }
     }
     

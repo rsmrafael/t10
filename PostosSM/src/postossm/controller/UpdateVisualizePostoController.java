@@ -41,9 +41,9 @@ public class UpdateVisualizePostoController {
         if (p != null) {
             PostoTable.update(PostoIndex,p);
             view.setImage(p.getImgPath());
+            //Mensagem de atualizado
+            JOptionPane.showMessageDialog(view,"Cadastro atualizado.");
         }
-        //Mensagem de atualizado
-        JOptionPane.showMessageDialog(view,"Cadastro atualizado.");
     }
     
     public void addPrice(){
