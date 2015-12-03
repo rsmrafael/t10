@@ -18,8 +18,8 @@ import postossm.view.UpdateVisualizePostoView;
  */
 public class PostossmController {
     
-    private PostossmView view;
-    private PostosTableModel model;
+    private final PostossmView view;
+    private final PostosTableModel model;
     
     public void insert() {
         //Chama outra janela
@@ -38,8 +38,8 @@ public class PostossmController {
         //Carrega dados
     }
     
-    public void add(){
-        
+    public void add(){ 
+        // Abre novo frame
         view.setVisible(false);
         new AddPostoView(view,model).setVisible(true);
     }
@@ -62,4 +62,7 @@ public class PostossmController {
         model.remove(index);
     }
 
+    public void buscar(){
+        model.updateTable(view.getTextBuscaBairro().getText());
+    }
 }

@@ -204,9 +204,6 @@
     <Component class="javax.swing.JTextField" name="Bandeira">
     </Component>
     <Component class="javax.swing.JTextField" name="Endereco">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EnderecoActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -219,9 +216,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="Bairro">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BairroActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="CEP">
     </Component>
@@ -242,7 +236,6 @@
       </Properties>
       <Events>
         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="JComboBox_CombustivelItemStateChanged"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JComboBox_CombustivelActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -341,21 +334,12 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="dia">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="diaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="RS">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RSActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="mes">
     </Component>
     <Component class="javax.swing.JTextField" name="NF">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NFActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="ano">
     </Component>

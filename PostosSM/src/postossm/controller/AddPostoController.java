@@ -19,10 +19,10 @@ import postossm.view.PostossmView;
  */
 public class AddPostoController {
     
-    private AddPostoView view;
-    private PostosTableModel model;
-    private PostossmView HomeFrame;
-    private PrecosTableModel PrecoTable;
+    private final AddPostoView view;
+    private final PostosTableModel model;
+    private final PostossmView HomeFrame;
+    private final PrecosTableModel PrecoTable;
     
   public AddPostoController(AddPostoView view,PostossmView HomeFrame, PostosTableModel model, PrecosTableModel PrecoTable) {
         this.view = view;

@@ -15,30 +15,50 @@ import javax.swing.table.AbstractTableModel;
 public class PostosTableModel extends AbstractTableModel  {
     private static final String[] columnNames = {"Posto", "Bairro", "Bandeira"};
 
-    private ArrayList<Posto> postos;
+    private final ArrayList<Posto> postos;
+    private final ArrayList<Posto> postosMostrados;
+    private String LastSearchedBairro;
     
     public PostosTableModel() {
-        postos = new ArrayList<Posto>();
+        postos = new ArrayList<>();
+        postosMostrados = new ArrayList<>();
+        LastSearchedBairro = "";
     }
 
     public void remove(int index) {
-	postos.remove(index);
+        postos.remove(postosMostrados.get(index));
+	postosMostrados.remove(index);
 	fireTableRowsDeleted(index, index);
     }
 
     public Posto select(int index) {
-        return postos.get(index);
+        return postosMostrados.get(index);
     }
     
     public void add(Posto p) {
         // Adds the element in the last position in the list
         postos.add(p);
-        fireTableRowsInserted(postos.size()-1, postos.size()-1);
+        postosMostrados.add(p);
+        updateTable(LastSearchedBairro);
+        fireTableRowsInserted(postosMostrados.size()-1, postosMostrados.size()-1);
     }
 
     public void update(int index, Posto p) {
-        postos.set(index, p);
+        postos.set(postos.indexOf(postosMostrados.get(index)), p);
+        postosMostrados.set(index,p);
+        updateTable(LastSearchedBairro);
         fireTableRowsUpdated(index, index);
+    }
+    
+    public void updateTable(String Bairro){
+        LastSearchedBairro = Bairro;
+        postosMostrados.clear();
+        for(Posto p : postos){
+            if(p.getBairro().toLowerCase().contains(Bairro.toLowerCase())){
+                postosMostrados.add(p);
+            }
+        }
+        fireTableRowsInserted(postosMostrados.size()-1, postosMostrados.size()-1);
     }
     
     @Override
@@ -53,15 +73,15 @@ public class PostosTableModel extends AbstractTableModel  {
 
     @Override
     public int getRowCount() {
-        return postos.size();
+        return postosMostrados.size();
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch(columnIndex) {
-            case 0: return postos.get(rowIndex).getNF();
-            case 1: return postos.get(rowIndex).getBairro();
-            case 2: return postos.get(rowIndex).getBandeira();
+            case 0: return postosMostrados.get(rowIndex).getNF();
+            case 1: return postosMostrados.get(rowIndex).getBairro();
+            case 2: return postosMostrados.get(rowIndex).getBandeira();
         }
         return null;
     }

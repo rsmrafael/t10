@@ -6,6 +6,7 @@
 
 package postossm.controller;
 
+import javax.swing.JOptionPane;
 import postossm.view.UpdateVisualizePostoView;
 import postossm.model.PostosTableModel;
 import postossm.model.PrecosTableModel;
@@ -19,11 +20,11 @@ import postossm.view.PostossmView;
  */
 public class UpdateVisualizePostoController {
     
-    private UpdateVisualizePostoView view;
-    private PostosTableModel model;
-    private PostossmView HomeFrame;
-    private PrecosTableModel PrecoTable;
-    private int PostoIndex;
+    private final UpdateVisualizePostoView view;
+    private final PostosTableModel model;
+    private final PostossmView HomeFrame;
+    private final PrecosTableModel PrecoTable;
+    private final int PostoIndex;
     
   public UpdateVisualizePostoController(UpdateVisualizePostoView view,PostossmView HomeFrame, PostosTableModel model, PrecosTableModel PrecoTable, int PostoIndex) {
         this.view = view;
@@ -39,6 +40,8 @@ public class UpdateVisualizePostoController {
         if (p != null) {
             model.update(PostoIndex,p);
         }
+        //Mensagem de atualizado
+        JOptionPane.showMessageDialog(view,"Cadastro atualizado.");
     }
     
     public void addPrice(){

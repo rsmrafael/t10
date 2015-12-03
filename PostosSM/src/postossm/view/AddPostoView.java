@@ -20,15 +20,16 @@ import postossm.model.PostosTableModel;
  */
 public class AddPostoView extends javax.swing.JFrame {
 
-    private AddPostoController controller;
-    private PrecosTableModel PrecoTable;
+    private final AddPostoController controller;
     private String ComboBox_Combustivel;
     /**
      * Creates new form AddPostoView
+     * @param HomeFrame
+     * @param model
      */
     public AddPostoView(PostossmView HomeFrame,PostosTableModel model) {
         initComponents();
-        PrecoTable = new PrecosTableModel();
+        PrecosTableModel PrecoTable = new PrecosTableModel();
         jtPriceList.setModel(PrecoTable);
         controller = new AddPostoController(this,HomeFrame,model,PrecoTable);
         ComboBox_Combustivel = (String)JComboBox_Combustivel.getSelectedItem();
